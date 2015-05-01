@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+        <title>Ahthentification</title>
+
+  </h:head>
+<h:body>
+<h:form id="form"  >   
+        <p:panelGrid columns="2"   >  
+        	<f:facet name="header">
+        	Authentification
+        	</f:facet>
+        	
+            <p:outputLabel  for="login" value="Login: " />  
+            <p:inputText id="login" value="#{utilisateurBean.nom}" required="true" label="Firstname"/>   
+  
+            <p:outputLabel  for="password" value="Password: " />  
+            <p:password id="password" value="#{utilisateurBean.motdepasse}" required="true" label="Password"/>  
+              
+        	<p:commandButton ajax="true" value="Se Connecter" icon="ui-icon-check"  action="#{utilisateurBean.authentification()}"/>
+   			 
+        </p:panelGrid>  
+</h:form>  
+</h:body>
+</html>

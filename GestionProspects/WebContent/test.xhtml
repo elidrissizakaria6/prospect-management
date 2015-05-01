@@ -1,0 +1,96 @@
+
+
+
+
+<p:panelGrid columns="2" style="width:100px;">
+   <f:facet name="header">  
+        Adresse 
+    </f:facet>
+<p:outputLabel id="adresseOutputId"  value="Adresse"/>
+<p:inputTextarea id="adresseInputId" required="true" size="7" value="#{prospectBean.adresse}"/>
+
+<p:outputLabel id="paysOutputId" value="Pays"/>
+<p:inputText id="paysInputId" size="7" required="true" value="#{prospectBean.pays}" placeholder="Maroc"/>
+
+<p:outputLabel id="villeOutputId" value="Ville"/>
+<h:selectOneMenu id="city" value="#{prospectBean.ville}" required="true">
+                <f:selectItem itemLabel="Choisissez la ville" itemValue="" />
+                <f:selectItems  value="#{prospectBean.villes}" />
+            </h:selectOneMenu>
+</p:panelGrid>
+
+        
+        <p:column width="140" sortBy="#{listd.adresse}" headerText="Adresse" filterBy="#{listd.adresse}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.adresse}"/>
+        </p:column> 
+        
+        <form id="form2">
+   						
+    <f:facet name="header">  
+        Ajouter un representant 
+    </f:facet>
+<p:outputLabel id="nomOutputId" value="Nom"/>
+<p:inputText id="nomInputId" size="7" value="#{RepresentantBean.nom}"/>
+
+<p:outputLabel id="prenomOutputId" value="Prénom"/>
+<p:inputText id="prenomInputId" size="7" value="#{RepresentantBean.prenom}"/>
+
+<p:outputLabel id="telephoneOutputId" value="Téléphone"/>
+<p:inputText id="telephoneInputId" size="7" value="#{RepresentantBean.telephone}"/>
+
+<p:outputLabel id="villeOutputId" value="Ville"/>
+<p:inputText id="villeInputId" size="7" value="#{RepresentantBean.ville}"/>
+
+						
+			<p:commandButton id="submitButton" partialSubmit="true"  action="#{RepresentantBean.AppliquerAjouterRepresentant()}" oncomplete="PF('dlg1').hide();" value="Ajouter"/>
+
+   					</form>	 
+   					
+   					
+   					
+   					<h:form>
+
+    <p:menu style="min-width:10px;min-height:50px;">
+        <p:submenu label="Nouveau">
+             <p:menuitem value="Prospect" action="#{prospectBean.AjouterProspect()}" onclick="#{prospectBean.trueItest()}" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+            <p:menuitem value="Evénement" action="AjouterAgenda" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+            <p:menuitem value="Intervenant" action="AjouterIntervenant" onclick="#{prospectBean.trueItest()}" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+        </p:submenu>
+        <p:submenu label="Modifier">
+             <p:menuitem value="Prospect" action="#{prospectBean.ModifierProspect()}" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+            <p:menuitem value="Evénement" action="AjouterAgenda" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+            <p:menuitem value="Intervenant" action="AjouterIntervenant" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+        </p:submenu>
+    </p:menu>
+    </h:form>
+    
+    
+    <p:row >
+ <p:column>
+<p:outputLabel style="display: block;width: 150px;float: left;"  value="Prospect" />
+</p:column>
+<p:column>
+            <p:selectOneMenu style="display: block;width: 150px; float: left;" size="7" id="IdProspect" required="true" value="#{AgendaBean.resultProspect}">  
+                <f:selectItem itemLabel="" itemValue="" />  
+                <f:selectItems value="#{AgendaBean.listeProspectString}" />  
+            </p:selectOneMenu>
+</p:column>
+<p:column>
+     <p:commandButton ajax="false"  icon="ui-icon-circle-plus" onclick="#{prospectBean.falseItest()}"  action="AjouterUnProspect" />
+</p:column>
+</p:row>
+ <script type="javascript">
+    var disabledDays = #{AgendaBean.listdate};
+ 
+function disableAllTheseDays(date) {
+var m = date.getMonth(), d = date.getDate(), y = date.getYear(), h = date.getHours(), mn = date.getMinutes();
+for (i = 0; i &lt; disabledDays.length; i++) {
+if($.inArray((m+1) + '-' + d + '-' + y + '-' + h + '-' + mn,disabledDays) != -1) {
+return [false,''];
+}
+}
+return [true,''];
+}
+ 
+</script>
+beforeShowDay="disableAllTheseDays"

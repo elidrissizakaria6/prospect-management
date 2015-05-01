@@ -1,0 +1,102 @@
+ <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title></title>
+<f:metadata>  
+     <f:event listener="#{SessionBean.verifyUseAdmin}" type="preRenderView">  
+    </f:event>  
+    </f:metadata>
+  </h:head>
+    <h:body>
+    <p:layout style="min-width:900px;min-height:400px;" id="layout" fullPage="true"> 
+        <p:layoutUnit size="50"  position="north" ><ui:include src="/Menus.xhtml" /></p:layoutUnit>
+        
+
+ <p:layoutUnit position="center" size="500" >
+ <h:form id="form">
+ <p:commandButton ajax="true" icon="ui-icon-check" style="float: right;"   value="Modifier" rendered="#{IntervenantBean.modifier}"  action="#{IntervenantBean.AppliquerModifierIntervenant()}"  />
+<p:commandButton ajax="true" icon="ui-icon-disk" style="float: right;"  value="Enregistrer" rendered="#{IntervenantBean.ajouter}"  update=":form:cars"  action="#{IntervenantBean.AppliquerAjouterIntervenant()}" />
+<p:commandButton ajax="true" icon="ui-icon-disk" style="float: right;"  value="Enregistrer et Quitter" rendered="#{IntervenantBean.ajouter}" update="form" action="#{IntervenantBean.AppliquerAjouterIntervenantQuitter()}"/>
+
+ <br />
+ <br />
+        <p:fieldset legend="Renseignements généraux" toggleable="true" toggleSpeed="500">
+ 
+ <h:panelGrid border="0">  
+ <p:row>
+ <p:column>
+<p:outputLabel  style="display: block;width: 150px;float: left;" id="nomOutputId" value="Nom"/>
+<p:inputText id="nomInputId"  style="display: block;width: 150px;float: left;" size="7" required="true" value="#{IntervenantBean.nom}"/>
+</p:column>
+<p:column>
+<p:outputLabel id="telephoneOutputId" value="Prénom" style="display: block;width: 100px;margin: 0 0 0 150px;float: left;"/>
+<p:inputText id="telephoneInputId"  style="display: block;width: 150px;float: left;" required="true" size="7" value="#{IntervenantBean.prenom}"/>
+</p:column>
+</p:row>
+ <p:row>
+ <p:column>
+<p:outputLabel  style="display: block;width: 150px;float: left;" id="portableOutputId" value="Portable"/>
+<p:inputMask value="#{IntervenantBean.portable}" required="true" mask="(0999) 99-99-99" style="display: block;width: 150px;float: left;"/>
+</p:column>
+<p:column>
+<p:outputLabel id="emailOutputId" value="Email" style="display: block;width: 100px;margin: 0 0 0 150px;float: left;"/>
+<p:inputText id="email" required="true" label="email" size="40"
+		requiredMessage="Please enter your email address."
+		validatorMessage="Format de l'email invalide"
+		value="#{IntervenantBean.email}">
+ 
+	  <f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+ 
+	</p:inputText>
+	<p:message for="email" />
+	</p:column>
+</p:row>
+
+
+
+</h:panelGrid>
+</p:fieldset>
+<br />
+<p:fieldset legend="Intervenants" toggleable="true" toggleSpeed="500">
+<p:dataTable id="cars" 
+      stickyHeader="false" var="listd" 
+    sortMode="single" widgetVar="IntervenantTable" value="#{IntervenantBean.list}" rowKey="#{listd.idIntervenant}"
+                  emptyMessage="Pas de Intervenants avec ces critères"  filteredValue="#{IntervenantBean.filteredIntervenants}">
+                  
+  		<f:facet name="header" >
+            <p:outputPanel >
+                <h:outputText style="width:150px;" value="Chercher dans tous les camps:" />
+                <p:inputText id="globalFilter" onkeyup="PF('IntervenantTable').filter()" style="width:150px;" placeholder="Enter keyword"/>            
+            </p:outputPanel>
+        </f:facet>
+       
+            
+  
+        <p:column width="140"  sortBy="#{listd.nom}" headerText="Nom" filterBy="#{listd.nom}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.nom}"/>
+        </p:column>  
+  
+        <p:column width="140" sortBy="#{listd.prenom}" headerText="Prénom"  filterBy="#{listd.prenom}" filterMatchMode="contains" filterStyle="display:none">  
+           <h:outputText value="#{listd.prenom}"/>  
+        </p:column>  
+  
+        <p:column width="140" sortBy="#{listd.portable}"  headerText="Portable" filterBy="#{listd.portable}" filterStyle="display:none">  
+            <h:outputText  value="#{listd.portable}"/> 
+        </p:column>  
+        
+        <p:column width="140" sortBy="#{listd.email}" headerText="Email" filterBy="#{listd.email}" filterStyle="display:none">  
+            <h:outputText  value="#{listd.email}"/> 
+        </p:column>
+        
+            
+          </p:dataTable> 
+</p:fieldset>
+</h:form>
+</p:layoutUnit>
+</p:layout>
+</h:body>
+</html>

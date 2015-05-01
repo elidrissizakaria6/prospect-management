@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#Authentification.xhtml"
+  PATH="/Authentification.xhtml" SHAPE="32,17,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#GestionProspect.xhtml"
+  PATH="/GestionProspect.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#GestionProspect.xhtml:0" NAME="item"
+   PATH="/GestionProspect.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Ajouter::#AjouterProspect.xhtml"
+    NAME="output" PATH="/AjouterProspect.xhtml"
+    TARGET="rules:#AjouterProspect.xhtml" TITLE="Ajouter" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="AjouterAgenda::#AjouterAgenda.xhtml"
+    NAME="output1" PATH="/AjouterAgenda.xhtml"
+    TARGET="rules:#AjouterAgenda.xhtml" TITLE="AjouterAgenda" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="AjouterIntervenant::#AjouterIntervenant.xhtml" NAME="output2"
+    PATH="/AjouterIntervenant.xhtml"
+    TARGET="rules:#AjouterIntervenant.xhtml" TITLE="AjouterIntervenant" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Logout::#Login.xhtml" NAME="output3"
+    PATH="/Login.xhtml" TARGET="rules:#Login.xhtml" TITLE="Logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#AjouterProspect.xhtml"
+  PATH="/AjouterProspect.xhtml" SHAPE="448,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#AjouterProspect.xhtml:0" NAME="item"
+   PATH="/AjouterProspect.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="GestionProspect::#GestionProspect.xhtml"
+    NAME="output1" PATH="/GestionProspect.xhtml"
+    TARGET="rules:#GestionProspect.xhtml" TITLE="GestionProspect" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="agenda::#AjouterAgenda.xhtml" NAME="output"
+    PATH="/AjouterAgenda.xhtml" TARGET="rules:#AjouterAgenda.xhtml"
+    TITLE="agenda" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="AjouterAgenda::#AjouterAgenda.xhtml"
+    NAME="output3" PATH="/AjouterAgenda.xhtml"
+    TARGET="rules:#AjouterAgenda.xhtml" TITLE="AjouterAgenda" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="AjouterIntervenant::#AjouterIntervenant.xhtml" NAME="output4"
+    PATH="/AjouterIntervenant.xhtml"
+    TARGET="rules:#AjouterIntervenant.xhtml" TITLE="AjouterIntervenant" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="representant::#AjouterRepresentant.xhtml"
+    NAME="output5" PATH="/AjouterRepresentant.xhtml"
+    TARGET="rules:#AjouterRepresentant.xhtml" TITLE="representant" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Piecejoin::#AjouterPiecejoin.xhtml"
+    NAME="output6" PATH="/AjouterPiecejoin.xhtml"
+    TARGET="rules:#AjouterPiecejoin.xhtml" TITLE="Piecejoin" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#GestionIntervenant.xhtml"
+  PATH="/GestionIntervenant.xhtml" SHAPE="688,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#GestionIntervenant.xhtml:0" NAME="item"
+   PATH="/GestionIntervenant.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="AjouterIntervenant::#AjouterIntervenant.xhtml" NAME="output"
+    PATH="/AjouterIntervenant.xhtml"
+    TARGET="rules:#AjouterIntervenant.xhtml" TITLE="AjouterIntervenant" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Logout::#Login.xhtml" NAME="output1"
+    PATH="/Login.xhtml" TARGET="rules:#Login.xhtml" TITLE="Logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#AjouterIntervenant.xhtml"
+  PATH="/AjouterIntervenant.xhtml" SHAPE="896,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#AjouterIntervenant.xhtml:0" NAME="item"
+   PATH="/AjouterIntervenant.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="agenda::#AjouterAgenda.xhtml" NAME="output"
+    PATH="/AjouterAgenda.xhtml" TARGET="rules:#AjouterAgenda.xhtml"
+    TITLE="agenda" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="prospect::#GestionProspect.xhtml"
+    NAME="output1" PATH="/GestionProspect.xhtml"
+    TARGET="rules:#GestionProspect.xhtml" TITLE="prospect" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="GestionIntervenant::#GestionIntervenant.xhtml" NAME="output2"
+    PATH="/GestionIntervenant.xhtml"
+    TARGET="rules:#GestionIntervenant.xhtml" TITLE="GestionIntervenant" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#AjouterAgenda.xhtml"
+  PATH="/AjouterAgenda.xhtml" SHAPE="256,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#AjouterAgenda.xhtml:0" NAME="item"
+   PATH="/AjouterAgenda.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="GestionProspect::#GestionProspect.xhtml"
+    NAME="output3" PATH="/GestionProspect.xhtml"
+    TARGET="rules:#GestionProspect.xhtml" TITLE="GestionProspect" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Piecejoin::#AjouterPiecejoin.xhtml"
+    NAME="output" PATH="/AjouterPiecejoin.xhtml"
+    TARGET="rules:#AjouterPiecejoin.xhtml" TITLE="Piecejoin" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#Menus.xhtml" PATH="/Menus.xhtml"
+  SHAPE="736,209,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#Menus.xhtml:0" NAME="item"
+   PATH="/Menus.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Logout::#Authentification.xhtml"
+    NAME="output" PATH="/Authentification.xhtml"
+    TARGET="rules:#Authentification.xhtml" TITLE="Logout" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Ajouter::#AjouterProspect.xhtml"
+    NAME="output1" PATH="/AjouterProspect.xhtml"
+    TARGET="rules:#AjouterProspect.xhtml" TITLE="Ajouter" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="AjouterAgenda::#AjouterAgenda.xhtml"
+    NAME="output2" PATH="/AjouterAgenda.xhtml"
+    TARGET="rules:#AjouterAgenda.xhtml" TITLE="AjouterAgenda" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="AjouterIntervenant::#AjouterIntervenant.xhtml" NAME="output3"
+    PATH="/AjouterIntervenant.xhtml"
+    TARGET="rules:#AjouterIntervenant.xhtml" TITLE="AjouterIntervenant" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Logout::#Login.xhtml" NAME="output4"
+    PATH="/Login.xhtml" TARGET="rules:#Login.xhtml" TITLE="Logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#AjouterRepresentant.xhtml"
+  PATH="/AjouterRepresentant.xhtml" SHAPE="864,545,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#AjouterRepresentant.xhtml:0" NAME="item"
+   PATH="/AjouterRepresentant.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="AjouterProspect::#AjouterProspect.xhtml"
+    NAME="output" PATH="/AjouterProspect.xhtml"
+    TARGET="rules:#AjouterProspect.xhtml" TITLE="AjouterProspect" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#AjouterPiecejoin.xhtml"
+  PATH="/AjouterPiecejoin.xhtml" SHAPE="864,577,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#AjouterPiecejoin.xhtml:0" NAME="item"
+   PATH="/AjouterPiecejoin.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="AjouterProspect::#AjouterProspect.xhtml"
+    NAME="output" PATH="/AjouterProspect.xhtml"
+    TARGET="rules:#AjouterProspect.xhtml" TITLE="AjouterProspect" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="AjouterAgenda::#AjouterAgenda.xhtml"
+    NAME="output1" PATH="/AjouterAgenda.xhtml"
+    TARGET="rules:#AjouterAgenda.xhtml" TITLE="AjouterAgenda" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#Login.xhtml" PATH="/Login.xhtml"
+  SHAPE="560,289,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#Login.xhtml:0" NAME="item"
+   PATH="/Login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="GestionProspect::#GestionProspect.xhtml"
+    NAME="output" PATH="/GestionProspect.xhtml"
+    TARGET="rules:#GestionProspect.xhtml" TITLE="GestionProspect" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

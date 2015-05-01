@@ -1,0 +1,168 @@
+ <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:pe="http://primefaces.org/ui/extensions">
+    <h:head>
+        <title></title>
+        <style type="text/css">
+      
+        .Appel{
+        background-color:red !important;
+        }
+        .Email{
+        background-color:blue;
+        }
+        
+        </style>
+  </h:head>
+    <h:body>
+   
+    <p:layout style="min-width:900px;min-height:400px;" id="layout" fullPage="true"> 
+        <p:layoutUnit size="50"  position="north" ><ui:include src="/Menus.xhtml" /></p:layoutUnit>
+ <p:layoutUnit position="center" size="500" >
+    <h:form id="form">
+    	 <p:commandButton ajax="true" update="form" icon="ui-icon-check" style="float: right;"   value="Modifier" rendered="#{AgendaBean.modifier}"  action="#{AgendaBean.AppliquerModifierAgenda()}"  />
+        <p:commandButton ajax="true" update="form" value="Enregistrer" style="float: right;" icon="ui-icon-check" rendered="#{AgendaBean.ajouter}"  action="#{AgendaBean.AppliquerAjouterAgenda()}"/>   
+        <p:commandButton ajax="true" update="form" value="Enregistrer et Quitter" icon="ui-icon-check" style="float: right;" rendered="#{AgendaBean.ajouter}"  action="#{AgendaBean.AppliquerAjouterAgendaQuitter()}"/>   
+<br />
+<br />
+<div style=" float: left;width: 55%;">
+<p:fieldset legend="Renseignements sur l'évenement"  toggleable="true" toggleSpeed="500">
+
+<h:panelGrid border="0" width="670" >  
+<p:row>
+<p:column>
+<p:outputLabel style="display: block;width: 150px;float: left;"  value="Nature de l'evenement" />
+</p:column>
+<p:column>
+    		<p:selectOneMenu style="display: block;width: 150px; float: left;" size="7"  id="NatureEvenement" required="true" value="#{AgendaBean.resultNE}">  
+                <f:selectItem itemLabel="" itemValue="" />  
+                <f:selectItems value="#{AgendaBean.listeNEString}" />  
+            </p:selectOneMenu>
+</p:column>
+<p:column rendered="#{SessionBean.admin}">
+<p:outputLabel rendered="#{SessionBean.admin}" style="display: block;width: 150px;float: left;margin: 0 0 0 50px;"   value="Intervenant" />
+</p:column>
+<p:column rendered="#{SessionBean.admin}">
+            <p:selectOneMenu rendered="#{SessionBean.admin}" id="Intervenant" style="display: block;width: 150px; float: left;" size="7"  required="true" value="#{AgendaBean.resulIntervenant}">                 
+                <f:selectItem itemLabel="" itemValue="" />  
+                <f:selectItems value="#{AgendaBean.listeIntervenantString}" />  
+			<p:ajax event="change" listener="#{AgendaBean.IntervenantChanged}" update=":form:monagenda"  />
+                    </p:selectOneMenu>
+</p:column>
+
+</p:row>
+<p:row>
+<p:column>
+<p:outputLabel style="display: block;width: 150px;float: left;"  value="Statut" />
+</p:column>
+<p:column>
+            <p:selectOneMenu style="display: block;width: 150px; float: left;" size="7" id="Statut" required="true" value="#{AgendaBean.resultStatut}">  
+                <f:selectItem itemLabel="" itemValue="" />  
+                <f:selectItems value="#{AgendaBean.listeStatutString}" />  
+            </p:selectOneMenu>
+</p:column>
+<p:column>
+<p:outputLabel style="display: block;width: 150px;float: left;margin: 0 0 0 50px;"   value="Date début de l'événement" />
+</p:column>
+<p:column>             
+    <p:calendar  style="display: block;width: 150px; float: left;" immediate="true" value="#{AgendaBean.dateHeuredebut}" required="true" mindate="#{AgendaBean.RecupererDateSysteme()}" size="12" id="popupCal" widgetVar="startDateFromVar" pattern="dd/MM/yyyy HH:mm" > 
+    <p:ajax event="dateSelect" update="popupCal popupCal1"/>
+    </p:calendar> 
+   
+</p:column>
+</p:row>
+<p:row>
+
+<p:column>         
+<p:outputLabel style="display: block;width: 150px;float: left;"  value="Lieu" />
+</p:column>   
+<p:column>     
+     <p:inputText id="lieuInputId" style="display: block;width: 150px; float: left;" size="7" required="true" value="#{AgendaBean.lieu}"/>
+</p:column> 
+<p:column>
+<p:outputLabel style="display: block;width: 150px;float: left;margin: 0 0 0 50px;"   value="Date fin de l'événement" />
+</p:column>
+<p:column>             
+    <p:calendar  style="display: block;width: 150px; float: left;"  value="#{AgendaBean.dateHeureFin}" required="true" mindate="#{AgendaBean.dateHeuredebut}" size="12" id="popupCal1" widgetVar="startDateFromVar" pattern="dd/MM/yyyy HH:mm" > 
+    <p:ajax event="dateSelect" update="popupCal1"/>
+    </p:calendar> 
+   
+</p:column> 
+</p:row>
+</h:panelGrid>
+</p:fieldset>
+
+<br />
+<h:outputText rendered="#{AgendaBean.ajouter}" style="font-weight:bold" value="Veuillez entrer les pièces joint en première" />
+<br />
+<p:fieldset  legend="List des Piéces joins" toggleable="true" toggleSpeed="500">
+
+   <p:dataTable id="Piecejoin"  var="listd" sortMode="single" 
+    			widgetVar="PiecejoinTable" value="#{PiecejoinBean.tmplist}" rowKey="#{listd.idPiecejoin}"  
+                  emptyMessage="Pas de piéce join"  >
+ 		<p:column width="15" >  
+        <p:commandButton   action="#{PiecejoinBean.SupprimerPiecejoin(listd)}" update=":form:Piecejoin"  style="width:15px;height:15px" icon="ui-icon-trash"/>
+        </p:column>
+        <p:column width="15" >  
+         <p:commandButton id="downloadLink" ajax="false" style="width:15px;height:15px" icon="ui-icon-arrowstop-1-s" actionListener="#{PiecejoinBean.FileDownload(listd)}">
+    <p:fileDownload  value="#{PiecejoinBean.download}" />
+</p:commandButton>
+        </p:column>
+        
+        <p:column  sortBy="#{listd.denomination}"  headerText="Piece join"  >  
+            <h:outputText  value="#{listd.denomination}"/>
+        </p:column>  
+  
+   </p:dataTable>
+  
+  	<p:commandButton action="Piecejoin"  id="showDialogButton"  icon="ui-icon-circle-plus"  />				
+   
+    
+
+</p:fieldset>
+</div>
+<div style="margin-left:57%;width:75%">
+<p:fieldset legend="Agenda de l'intervenant" style="width:54%" toggleable="true" toggleSpeed="500">
+
+<p:growl id="messages" showDetail="true" />
+ 
+        <p:schedule timeZone="GMT+1" id="monagenda"  value="#{AgendaBean.eventModel}" widgetVar="myschedule">
+ 
+            <p:ajax event="dateSelect" listener="#{AgendaBean.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+            <p:ajax event="eventSelect" listener="#{AgendaBean.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+            <p:ajax event="eventMove" listener="#{AgendaBean.onEventMove}" update="messages" />
+            <p:ajax event="eventResize" listener="#{AgendaBean.onEventResize}" update="messages" />
+ 
+        </p:schedule>
+ 
+    <p:dialog widgetVar="eventDialog" resizable="false"  header="Détails de l'événement" showEffect="clip" hideEffect="clip">
+        <h:panelGrid id="eventDetails" columns="2">
+        <h:outputLabel for="Prospect" value="Prospect:" />
+            <p:inputText id="Prospect" value="#{AgendaBean.event.data.prospect.raisonsociale}" readonly="true"  />
+            <h:outputLabel for="Lieu" value="Lieu:" />
+            <p:inputText id="Lieu" value="#{AgendaBean.event.data.lieu}" readonly="true"  />
+            <h:outputLabel for="Statut1" value="Statut:" />
+            <p:inputText id="Statut1" value="#{AgendaBean.event.data.statut.denomination}" readonly="true"  />
+            <h:outputLabel for="nature" value="Nature:" />
+            <p:inputText id="nature" value="#{AgendaBean.event.title}" readonly="true"  />
+            <h:outputLabel for="De" value="De:" />
+            <p:inputMask id="De" value="#{AgendaBean.event.startDate}"  readonly="true" mask="99/99/9999 99:99">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+            </p:inputMask>
+            <h:outputLabel for="A" value="A:" />
+            <p:inputMask id="A" value="#{AgendaBean.event.endDate}" readonly="true" mask="99/99/9999 99:99">
+                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+            </p:inputMask>
+ 
+            </h:panelGrid>
+    </p:dialog>    
+</p:fieldset>
+</div>
+</h:form>
+</p:layoutUnit>
+</p:layout>
+</h:body>
+</html>

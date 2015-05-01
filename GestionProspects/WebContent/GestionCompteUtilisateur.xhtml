@@ -1,0 +1,108 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Liste des Prospects</title>
+<f:metadata>  
+     <f:event listener="#{SessionBean.verifyUseAdmin}" type="preRenderView">  
+    </f:event>  
+    </f:metadata>
+               <style type="text/css">
+        .ui-widget-header .ui-datatable-scrollable-footer{
+        padding-top: 1px
+        }
+    </style>
+  </h:head>
+    <h:body>
+    
+    <p:layout style="min-width:900px;min-height:400px;" id="layout" fullPage="true"> 
+<p:layoutUnit size="50" position="north" ><ui:include src="/Menus.xhtml" /></p:layoutUnit>
+
+
+<h:form id="form">
+     
+    <p:layoutUnit position="center" size="230"  resizable="false" closable="true" collapsible="true"> 
+    
+    <p:layout>
+    
+    <p:layoutUnit position="center">
+    
+   <p:dataTable id="cars" 
+     var="listd" 
+     widgetVar="IntervenantTable" value="#{utilisateurBean.tmplist}" rowKey="#{listd.idUtilisateur}"
+                  emptyMessage="Pas d'Intervenant avec ces critères" rowSelectMode="single" filteredValue="#{IntervenantBean.filteredIntervenants}">
+                  
+           <p:ajax  event="rowSelect" listener="#{IntervenantBean.onRowSelect}" update=":form:Agenda :form:cars" render=":form:Agenda :form:cars"   />
+          
+  		<f:facet name="header" >
+            <p:outputPanel >
+                <h:outputText style="width:150px;" value="Chercher dans tous les camps:" />
+                <p:inputText id="globalFilter" onkeyup="PF('IntervenantTable').filter()" style="width:150px;" placeholder="Enter keyword"/>
+                <p:commandButton action="#{IntervenantBean.AjouterProspect()}" style="width:12%;float: left;height:8%" ajax="false" icon="ui-icon-circle-plus" />
+            
+            </p:outputPanel>
+        </f:facet>
+       
+                <p:column width="1" >  
+        <p:commandButton action="#{utilisateurBean.ModifierUtilisateur(listd)}" style="width:15px;height:15px" ajax="false" icon="ui-icon-pencil"/>
+        		</p:column>
+  
+        <p:column width="140"  sortBy="#{listd.nom}" headerText="Nom" filterBy="#{listd.nom}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.nom}"/>
+        </p:column>    
+          </p:dataTable>  
+     </p:layoutUnit>
+
+  <p:layoutUnit position="south" size="322" resizable="false" closable="true" collapsible="true">  
+   
+ 
+          <p:dataTable id="Agenda" scrollable="false" selection="#{AgendaBean.selectedAgenda}" filteredValue="#{AgendaBean.filteredAgenda}"
+    selectionMode="single"  var="lista" sortMode="single" 
+    			widgetVar="AgendaTable" value="#{AgendaBean.list}" rowKey="#{lista.id}"  
+                  emptyMessage="Pas d'événement avec ces critères"  > 
+                  
+    <p:ajax event="rowSelect" listener="#{AgendaBean.onRowSelect}" />
+     	
+     	<f:facet name="header" >
+            <p:outputPanel >
+                <h:outputText style="width:150px;" value="Chercher dans tous les camps:" />
+                <p:inputText id="globalFilter" onkeyup="PF('AgendaTable').filter()" style="width:150px;" placeholder="Enter keyword"/>
+            	<p:commandButton action="#{AgendaBean.AjouterAgenda()}" rendered="#{prospectBean.checked}" style="width:12%;height:6%;float: left;" ajax="false" icon="ui-icon-circle-plus" />
+            </p:outputPanel>
+        </f:facet>
+     	<p:column width="17" >  
+        <p:commandButton action="#{AgendaBean.ModifierAgenda(lista)}" style="width:15px;height:17px" ajax="false" icon="ui-icon-pencil"/>
+        </p:column>
+        <p:column sortBy="#{lista.prospect.raisonsociale}" headerText="Prospect" filterBy="#{lista.prospect.raisonsociale}" filterMatchMode="contains" filterStyle="display:none" >  
+            <h:outputText id="id21" value="#{lista.prospect.raisonsociale}"/> 
+        </p:column>
+         <p:column  sortBy="#{lista.dateHeuredebut}" width="170" headerText="Date Début" filterBy="#{lista.dateHeuredebut}" filterMatchMode="contains" filterStyle="display:none" >  
+            <h:outputText id="id01" value="#{lista.dateHeuredebut}"/>
+        </p:column>  
+  
+        <p:column sortBy="#{lista.dateHeureFin}" width="170" headerText="Date fin" filterBy="#{lista.dateHeureFin}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText id="id41" value="#{lista.dateHeureFin}"/>  
+        </p:column> 
+  
+        <p:column sortBy="#{lista.natureevenement.libelle}" headerText="Nature" filterBy="#{lista.natureevenement.libelle}" filterMatchMode="contains" filterStyle="display:none">  
+           <h:outputText id="id11" value="#{lista.natureevenement.libelle}"/>  
+        </p:column>  
+  
+        <p:column sortBy="#{lista.statut.denomination}" headerText="Statut" filterBy="#{lista.statut.denomination}" filterMatchMode="contains" filterStyle="display:none" >  
+            <h:outputText id="id31" value="#{lista.statut.denomination}"/>
+        </p:column> 
+        
+        <p:column sortBy="#{lista.lieu}" width="170" headerText="Lieu" filterBy="#{lista.lieu}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText id="id61" value="#{lista.lieu}"/>  
+        </p:column>
+
+          </p:dataTable>  
+          </p:layoutUnit>
+          </p:layout>
+          </p:layoutUnit>
+          </h:form>
+          </p:layout>
+</h:body>
+</html>

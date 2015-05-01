@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory >
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">admin</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3307/gestionprospects</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <property name="current_session_context_class">thread</property>
+  <property name="connection.pool_size">10</property>
+  <property name="show_sql">false</property>
+  <mapping resource="DAO/Agenda.hbm.xml"/>
+  <mapping resource="DAO/Utilisateur.hbm.xml"/>
+  <mapping resource="DAO/Intervenant.hbm.xml"/>
+  <mapping resource="DAO/Natureevenement.hbm.xml"/>
+  <mapping resource="DAO/Piecejoin.hbm.xml"/>
+  <mapping resource="DAO/Representant.hbm.xml"/>
+  <mapping resource="DAO/Prospect.hbm.xml"/>
+  <mapping resource="DAO/Statut.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>

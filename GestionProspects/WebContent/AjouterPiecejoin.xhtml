@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+ <h:head>
+        <title></title>
+
+  </h:head>
+    <h:body>
+    <p:layout style="min-width:900px;min-height:400px;" id="layout" fullPage="true"> 
+        <p:layoutUnit size="50"  position="north" ><ui:include src="/Menus.xhtml" /></p:layoutUnit>
+        
+
+ <p:layoutUnit position="center" size="500" >
+<h:form id="form" enctype="multipart/form-data" > 
+        <p:commandButton value="Enregistrer" action="#{PiecejoinBean.Telecharger()}" icon="ui-icon-disk" style="float: right;" actionListener="#{PiecejoinBean.upload}" ajax="false"/>
+<br />
+<br />
+        <p:fieldset legend="Ajouter Piéce join" toggleable="true" toggleSpeed="500">
+  	
+        <h:panelGrid   >  
+  
+             <p:fileUpload required="true" value="#{PiecejoinBean.file}" mode="simple" sizeLimit="20000000"
+                      allowTypes="/(\\\\\\\\\\\\\\\\\\./\\\\\\\\\\\\\\\\\\/)(gif|jpe?g|png|txt|pdf|doc|docx|rar|zip|exe|apk)$/"/>
+        <p:growl id="messages" showDetail="true"/>
+        </h:panelGrid> 
+        </p:fieldset>
+        </h:form>
+  </p:layoutUnit>
+  </p:layout>
+  
+</h:body>
+</html>

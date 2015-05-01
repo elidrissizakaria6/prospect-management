@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mai 2014 15:32:28 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping default-lazy="false">
+ <class catalog="gestionprospects" name="DAO.Representant" table="representant">
+  <id name="idRepresantant" type="java.lang.Integer">
+   <column name="idRepresantant"/>
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="DAO.Prospect" fetch="select" name="prospect">
+   <column name="monKeyProspect"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nom" type="string">
+   <column length="45" name="Nom" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="prenom" type="string">
+   <column length="45" name="Prenom" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="telephone" type="string">
+   <column length="45" name="Telephone" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="ville" type="string">
+   <column length="45" name="Ville" not-null="true"/>
+  </property>
+ </class>
+</hibernate-mapping>

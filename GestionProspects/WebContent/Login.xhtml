@@ -1,0 +1,51 @@
+   <html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+ <style type="text/css">
+
+ .ui-layout-north .ui-layout-unit-content {
+                    overflow:visible !important;
+                    border:none;
+                }
+                .ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd{
+             border: none;
+        }
+      
+                .ui-widget{font-size:90% !important;}
+/*                 .ui-layout-unit-content{background-image:url('Logoabnsoft.jpg');}
+ */      
+         </style>
+  </h:head>
+<h:body>
+
+     <p:layout fullPage="true">
+     <p:layoutUnit position="south">Username : [Première lettre du prénom].[Le nom sans espace] </p:layoutUnit>
+     <p:layoutUnit position="center" >
+     <h:graphicImage library="images" value="Logoabnsoft.jpg" width="99%" />
+     <br/>
+     <br/>
+     <h:form id="frmLogin"  >   
+     <p:message for="btnLogin" />  
+     <h:panelGrid style="margin: 0 0 0 40%;" >
+     <p:row>
+      <h:outputText value="Username" style="display: block;width: 150px;float: left;" /><h:inputText value="#{SessionBean.nom}" style="display: block;width: 150px;float: left;" />  
+      </p:row>
+      <p:row>
+      <h:outputText rendered="#{SessionBean.supprimermdp}" style="display: block;width: 150px;float: left;" value="Password" /><h:inputSecret  value="#{SessionBean.motdepasse}" rendered="#{SessionBean.supprimermdp}" style="display: block;width: 150px;float: left;" />
+      </p:row>
+      <p:row>
+      <h:outputText  rendered="#{SessionBean.ajoutermdp}" style="display: block;width: 150px;float: left;" value="New Password" /><p:password rendered="#{SessionBean.ajoutermdp}" required="true" match="mdp2" id="mdp1"  label="Mot de passe" value="#{SessionBean.motdepasse}" style="display: block;width: 150px;float: left;" />
+      </p:row>
+      <p:row>
+      <h:outputText  rendered="#{SessionBean.ajoutermdp}" style="display: block;width: 150px;float: left;" value="Confirmer Password" /><p:password rendered="#{SessionBean.ajoutermdp}" required="true" id="mdp2"  label="Confirmation" value="#{SessionBean.motdepasse}" style="display: block;width: 150px;float: left;" />
+      </p:row>
+      <p:commandButton ajax="true" update="@all" action="#{SessionBean.login()}" value="Login" id="btnLogin" />
+      <h:commandLink actionListener="#{SessionBean.AjouterMotdepasse}" value="Vous n'avez pas encore défini un mot de passe ?" /> 
+     </h:panelGrid> 
+     </h:form> 
+     </p:layoutUnit>
+     </p:layout>
+    </h:body>
+    </html> 

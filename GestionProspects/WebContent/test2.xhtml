@@ -1,0 +1,154 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Liste des Prospects</title>
+
+  </h:head>
+    <h:body>
+    <p:layout style="min-width:900px;min-height:400px;" id="layout" fullPage="true"> 
+
+<p:layoutUnit position="west" size="260" >
+
+<h:form>
+    <p:menu style="min-width:10px;min-height:50px;">
+        <p:submenu label="Nouveau">
+             <p:menuitem value="Prospect" action="#{prospectBean.AjouterProspect()}" onclick="#{prospectBean.trueItest()}" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+            <p:menuitem value="Evénement" action="AjouterAgenda" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+            <p:menuitem value="Intervenant" action="AjouterIntervenant" onclick="#{prospectBean.trueItest()}" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+        </p:submenu>
+        <p:submenu label="Modifier">
+             <p:menuitem value="Prospect" action="#{prospectBean.ModifierProspect()}" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+            <p:menuitem value="Evénement" action="AjouterAgenda" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+            <p:menuitem value="Intervenant" action="AjouterIntervenant" update="messages" ajax="false" icon="ui-icon-circle-plus"/> 
+        </p:submenu>
+    </p:menu>
+    </h:form>
+
+</p:layoutUnit> 
+
+<h:form id="form">
+     
+    <p:layoutUnit position="center"  resizable="false" closable="true" collapsible="true"> 
+    
+    <p:layout>
+    
+    <p:layoutUnit position="center">
+    
+    <p:dataTable id="cars" scrollable="true" scrollHeight="202" scrollWidth="550" frozenColumns="3" 
+    selection="#{prospectBean.selectedProspect}" selectionMode="single" stickyHeader="false"  var="listd" 
+    sortMode="multiple" widgetVar="ProspectTable" value="#{prospectBean.list}" rowKey="#{listd.idProspect}"  
+                 emptyMessage="Pas de prospects avec ces critères" filteredValue="#{prospectBean.filteredProspects}">
+                   
+           <p:ajax  event="rowSelect" listener="#{prospectBean.onRowSelect}" update=":form:Agenda"  />
+  		<f:facet name="header" >
+            <p:outputPanel >
+                <h:outputText value="Search all fields:" />
+                <p:inputText id="globalFilter" onkeyup="PF('ProspectTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+            </p:outputPanel>
+        </f:facet>
+        <p:column width="140"  sortBy="#{listd.raisonsociale}" headerText="Raison Sociale" filterBy="#{listd.raisonsociale}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.raisonsociale}"/>
+        </p:column>  
+  
+        <p:column width="140" sortBy="#{listd.raisonsocialeabrg}" headerText="RS Abrégé"  filterBy="#{listd.raisonsocialeabrg}" filterMatchMode="contains" filterStyle="display:none">  
+           <h:outputText value="#{listd.raisonsocialeabrg}"/>  
+        </p:column>  
+  
+        <p:column width="140" sortBy="#{listd.telephone}"  headerText="Téléphone" filterBy="#{listd.telephone}" filterStyle="display:none">  
+            <h:outputText  value="#{listd.telephone}"/> 
+        </p:column>  
+        
+        <p:column width="140" sortBy="#{listd.telephone2}" headerText="Téléphone 2" filterBy="#{listd.telephone2}" filterStyle="display:none">  
+            <h:outputText  value="#{listd.telephone2}"/> 
+        </p:column>
+        
+        <p:column width="140" sortBy="#{listd.fax}" headerText="Fax" filterBy="#{listd.fax}" filterStyle="display:none">  
+            <h:outputText  value="#{listd.fax}"/> 
+        </p:column>    
+  		
+  		<p:column width="190" sortBy="#{listd.siteWeb}" headerText="Site Web" filterBy="#{listd.siteWeb}" filterStyle="display:none">  
+            <h:outputText  value="#{listd.siteWeb}"/> 
+        </p:column>  
+        
+        <p:column width="190" sortBy="#{listd.email}" headerText="Email" filterBy="#{listd.email}"  filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText  value="#{listd.email}"/>
+        </p:column> 
+        
+        <p:column width="140" sortBy="#{listd.adresse}" headerText="Adresse" filterBy="#{listd.adresse}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.adresse}"/>
+        </p:column> 
+        
+         <p:column width="140" sortBy="#{listd.ville}" headerText="Ville" filterBy="#{listd.ville}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.ville}"/>  
+        </p:column>
+         
+        <p:column width="140" sortBy="#{listd.pays}" headerText="Pays" filterBy="#{listd.pays}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.pays}"/>
+        </p:column> 
+        
+        <p:column width="140" sortBy="#{listd.chiffreaffaire}" headerText="Chiffre d'affaire" filterBy="#{listd.chiffreaffaire}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.chiffreaffaire}"/>
+        </p:column>
+        
+        <p:column width="140" sortBy="#{listd.activite}" headerText="Activite" filterBy="#{listd.activite}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.activite}"/>
+        </p:column>
+        
+        <p:column width="140" sortBy="#{listd.secteur}" headerText="Secteur" filterBy="#{listd.secteur}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.secteur}"/>
+        </p:column>
+        
+        <p:column width="140" sortBy="#{listd.statut.denomination}" headerText="Statut" filterBy="#{listd.statut.denomination}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText value="#{listd.statut.denomination}"/>
+        </p:column> 
+            
+          </p:dataTable>  
+     </p:layoutUnit>
+
+  <p:layoutUnit position="south" size="310" resizable="true" closable="true" collapsible="true">  
+   
+  
+    <p:dataTable id="Agenda" selection="#{AgendaBean.selectedAgenda}" selectionMode="single"  var="lista" sortMode="multiple" 
+    			widgetVar="AgendaTable" value="#{AgendaBean.list}" rowKey="#{lista.id}"  
+                  emptyMessage="Pas d'événement avec ces critères"  filteredValue="#{AgendaBean.filteredAgenda}"> 
+                  
+    <p:ajax event="rowSelect" listener="#{AgendaBean.onRowSelect}" />
+                  
+        <p:column  sortBy="#{lista.dateHeure}" width="170" headerText="Date Heure" filterBy="#{lista.dateHeure}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText id="id01" value="#{lista.dateHeure}"/>
+        </p:column>  
+  
+        <p:column sortBy="#{lista.natureevenement.libelle}" headerText="Nature" filterBy="#{lista.natureevenement.libelle}" filterMatchMode="contains" filterStyle="display:none">  
+           <h:outputText id="id11" value="#{lista.natureevenement.libelle}"/>  
+        </p:column>  
+  
+        <p:column sortBy="#{lista.intervenant.nom}" headerText="Intervenant" filterBy="#{lista.intervenant.nom}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText id="id21" value="#{lista.intervenant.nom}"/> 
+        </p:column>  
+  
+        <p:column sortBy="#{lista.statut.denomination}" headerText="Statut" filterBy="#{lista.statut.denomination}"  filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText id="id31" value="#{lista.statut.denomination}"/>
+        </p:column> 
+         
+        <p:column sortBy="#{lista.prospect.raisonsociale}" width="160" headerText="Prospect" filterBy="#{lista.prospect.raisonsociale}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText id="id51" value="#{lista.prospect.raisonsociale}"/>
+        </p:column> 
+        
+        <p:column sortBy="#{lista.duree}" width="70" headerText="Duree" filterBy="#{lista.duree}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText id="id41" value="#{lista.duree}"/>  
+        </p:column>
+        
+        <p:column sortBy="#{lista.lieu}" width="170" headerText="Lieu" filterBy="#{lista.lieu}" filterMatchMode="contains" filterStyle="display:none">  
+            <h:outputText id="id61" value="#{lista.lieu}"/>  
+        </p:column>
+
+          </p:dataTable>    
+          </p:layoutUnit>
+          </p:layout>
+          </p:layoutUnit>
+          </h:form>
+          </p:layout>
+</h:body>
+</html>

@@ -1,0 +1,213 @@
+ <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Prospect</title>
+       
+  </h:head>
+    <h:body>
+    
+        <p:layout style="min-width:900px;min-height:400px;" id="layout" fullPage="true"> 
+        <p:layoutUnit size="50"  position="north" ><ui:include src="/Menus.xhtml" /></p:layoutUnit>
+        
+
+ <p:layoutUnit position="center" size="500" >
+ <h:form id="form">
+	<p:commandButton ajax="true" icon="ui-icon-check" style="float: right;"  value="Modifier" rendered="#{prospectBean.modifier}" update="form" action="#{prospectBean.AppliquerModifierProspect()}" />
+	<p:commandButton ajax="true" icon="ui-icon-disk" style="float: right;" value="Enregistrer" rendered="#{prospectBean.ajouter}" update="form" action="#{prospectBean.AppliquerAjouterProspect()}" />
+	<p:commandButton ajax="true" icon="ui-icon-disk" style="float: right;" value="Enregistrer et Quitter" rendered="#{prospectBean.ajouter}" update="form" action="#{prospectBean.AppliquerAjouterProspectQuitter()}"/>
+	<br />
+	<br />
+
+       <p:fieldset legend="Renseignements généraux" toggleable="true" toggleSpeed="500">
+        <h:panelGrid border="0" width="1000" > 
+<p:row>
+<p:column >
+<p:outputLabel style="display: block;width: 150px;float: left;" id="nomOutputId"  value="Raison sociale" />
+<p:inputText id="nomInputId" style="display: block;width: 150px; float: left;" size="7" required="true" value="#{prospectBean.raisonsociale}" />
+</p:column>
+<p:column >
+<p:outputLabel id="raisonOutputId" style="display: block;width: 100px;margin: 0 0 0 150px;float: left;" value="RS abrégé"/>
+<p:inputText id="raisonInputId" style="display: block;width: 150px;float: left;" size="7" required="true" value="#{prospectBean.raisonsocialeabrg}"/>
+</p:column>
+<p:column >
+			<p:outputLabel style="display: block;width: 80px;float: left;margin: 0 0 0 60px;">Statut</p:outputLabel>        
+            <p:selectOneMenu id="Statut" required="true" style="display: block;width: 150px;float: left;" value="#{prospectBean.resultStatut}">  
+                <f:selectItem itemLabel="" itemValue="" /> 
+                <f:selectItems value="#{prospectBean.listeStatutString}" />
+                
+            </p:selectOneMenu>
+</p:column>
+</p:row>
+<p:row>
+<p:column colspan="3">
+<p:outputLabel id="telephoneOutputId" style="display: block;width: 150px;float: left;" value="Téléphone"/>
+<p:inputMask value="#{prospectBean.telephone}"  required="true" mask="(0999) 99-99-99" style="display: block;width: 150px;float: left;"/>
+</p:column>
+<p:column colspan="3">
+<p:outputLabel id="telephone2OutputId" style="display: block;width: 100px;float: left;margin: 0 0 0 150px;" value="Téléphone 2"/>
+<p:inputMask value="#{prospectBean.telephone2}" mask="(0999) 99-99-99" style="display: block;width: 150px;float: left;"/>
+</p:column>
+<p:column colspan="3">
+<p:outputLabel id="faxOutputId" style="display: block;width: 80px;float: left;margin: 0 0 0 60px;" value="Fax"/>
+<p:inputMask value="#{prospectBean.fax}" required="true" mask="(0999) 99-99-99" style="display: block;width: 150px;float: left;"/>
+</p:column>
+</p:row>
+<p:row>
+<p:column colspan="5">
+<p:outputLabel id="sitewebOutputId" style="display: block;width: 150px;float: left;" value="Site Web"/>
+<p:inputText id="siteweb" style="display: block;width: 200px;float: left;" required="true" label="siteweb" size="40"
+		requiredMessage="Veuillez entrer un site web."
+		validatorMessage="Format invalide"
+		value="#{prospectBean.siteWeb}">
+ 
+	  <f:validateRegex pattern="^((ftp|http|https):\/\/)?([a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+.+([a-zA-Z0-9]+(\.[a-zA-Z0-9]+)))$" />
+	</p:inputText>
+	<p:message for="siteweb" />
+</p:column>
+<p:column colspan="4">
+<p:outputLabel id="emailOutputId" style="display: block;width: 100px;margin: 0 0 0 100px;float: left;" value="Email"/>
+<p:inputText id="email" required="true" label="email" size="40"
+		requiredMessage="Please enter your email address."
+		validatorMessage="Invalid email format"
+		value="#{prospectBean.email}">
+ 
+	  <f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+ 
+	</p:inputText>
+	<p:message for="email" />
+	</p:column>
+</p:row>
+</h:panelGrid>
+</p:fieldset>
+    <p:fieldset legend="Informations complémentaires" toggleable="true" toggleSpeed="500">
+     <h:panelGrid border="0" > 
+   <p:row>
+   <p:column >
+<p:outputLabel style="display: block;width: 150px;float: left;" id="nbeffOutputId"  value="Nombre d'effectifs" />
+<pe:inputNumber id="nbeffInputId" style="display: block;width: 150px; float: left;" size="7" required="true" decimalPlaces="0" value="#{prospectBean.nombreeff}" placeholder="20" />
+</p:column>
+   <p:column >
+<p:outputLabel id="chiffreaffaire" style="display: block;width: 200px;margin: 0 0 0 149px;float: left;" value="Chiffre d'affaire en DH"/>
+<pe:inputNumber id="chiffreaffaire2" size="7" value="#{prospectBean.chiffreaffaire}" style="display: block;width: 150px;float: left;" placeholder="999 999 DH"/>
+</p:column>
+</p:row>
+<p:row>
+<p:column colspan="5">
+<p:outputLabel id="activite" style="display: block;width: 150px;float: left;" value="Activité"/>
+<p:inputText id="activite2" style="display: block;width: 150px;float: left;" size="7"  value="#{prospectBean.activite}"/>
+</p:column>
+<p:column colspan="4">
+<p:outputLabel id="secteur" style="display: block;width: 200px;margin: 0 0 0 151px;float: left;" value="Secteur"/>
+<p:inputText id="secteur2" style="display: block;width: 150px;float: left;" size="7" value="#{prospectBean.secteur}"/>
+</p:column>
+</p:row>
+</h:panelGrid>
+</p:fieldset>
+ <p:fieldset legend="Adresse" toggleable="true" toggleSpeed="500">
+  <h:panelGrid  border="0"> 
+<p:row>
+   <p:column colspan="9">
+   <p:outputLabel id="adresseOutputId" style="display: block;width: 150px;float: left;"  value="Adresse"/>
+	<p:inputText id="adresseInputId" required="true" size="100" value="#{prospectBean.adresse}"/>
+</p:column>
+</p:row>
+<p:row>
+
+<p:column colspan="4">
+<p:outputLabel id="villeOutputId" style="display: block;width: 150px;float: left;" value="Ville*"/>
+<h:selectOneMenu id="city" style="display: block;width: 150px;float: left;" value="#{prospectBean.ville}">
+                <f:selectItem itemValue="" itemLabel=""/>
+                <f:selectItems  value="#{prospectBean.villes}" />
+           <p:ajax event="change" listener="#{prospectBean.villeChanged}" update="@form"  />   
+            </h:selectOneMenu>
+            <p:inputText style="display: block;width: 150px;float: left;" required="true"  value="#{prospectBean.ville}" placeholder="Entrez la ville ici" rendered="#{prospectBean.autreVille}"/>
+</p:column>
+</p:row>
+</h:panelGrid>
+</p:fieldset>
+</h:form>
+<div style=" float: left;width: 70%;">
+<h:outputText style="font-weight:bold" rendered="#{prospectBean.ajouter}" value="Veuillez entrer les pièces joint et les représentants en première" />
+
+ <p:fieldset legend="Representants" toggleable="true" style="width:95%;" toggleSpeed="500">
+ 
+<h:form id="form1">
+   <p:dataTable id="Representant"   var="lista" sortMode="single" 
+    			widgetVar="AgendaTable" value="#{RepresentantBean.tmplist}" rowKey="#{lista.idRepresantant}"  
+                  emptyMessage="Pas de représentant"  >
+ 		<p:column width="15" >  
+        <p:commandButton action="#{RepresentantBean.SupprimerPiecejoin(lista)}" update=":form1:Representant"  style="width:15px;height:15px" icon="ui-icon-trash"/>
+        </p:column>
+ 		<p:column width="15" >  
+        <p:commandButton   action="#{RepresentantBean.ModifierRepresentant(lista)}"  style="width:15px;height:15px" icon="ui-icon-pencil"/>
+        
+        </p:column>
+        
+        <p:column  sortBy="#{lista.nom}" headerText="Nom"  >  
+            <h:outputText  value="#{lista.nom}"/>
+        </p:column>  
+  
+        <p:column sortBy="#{lista.prenom}" headerText="Prénom" >  
+           <h:outputText  value="#{lista.prenom}"/>  
+        </p:column>  
+  
+        <p:column sortBy="#{lista.prospect.raisonsociale}" headerText="Prospect" >  
+            <h:outputText  value="#{lista.prospect.raisonsociale}"/> 
+        </p:column>
+        
+        <p:column sortBy="#{lista.telephone}" headerText="Téléphone" >  
+            <h:outputText  value="#{lista.telephone}"/> 
+        </p:column>
+        
+        <p:column sortBy="#{lista.ville}" headerText="Ville" >  
+            <h:outputText  value="#{lista.ville}"/> 
+        </p:column>
+     
+   </p:dataTable>
+  
+  	<p:commandButton action="#{RepresentantBean.AjouterRepresentant()}"  id="showDialogButton"  icon="ui-icon-circle-plus"  />				
+
+    </h:form>
+    
+   </p:fieldset>
+   </div>
+    <div style="margin-left: 73%;">
+    <BR />
+<p:fieldset legend="Piéces joins" toggleable="true" toggleSpeed="500" >
+    <h:form id="form2">
+   <p:dataTable id="Piecejoin"  var="listd" sortMode="single" 
+    			widgetVar="PiecejoinTable" value="#{PiecejoinBean.tmplist}" rowKey="#{listd.idPiecejoin}"  
+                  emptyMessage="Pas de piéce join"  >
+ 		<p:column width="15" >  
+        <p:commandButton action="#{PiecejoinBean.SupprimerPiecejoin(listd)}" update=":form2:Piecejoin"  style="width:15px;height:15px" icon="ui-icon-trash"/>
+        </p:column>
+       
+        <p:column width="15" >  
+         <p:commandButton id="downloadLink" ajax="false" style="width:15px;height:15px" icon="ui-icon-arrowstop-1-s" actionListener="#{PiecejoinBean.FileDownload(listd)}">
+    <p:fileDownload  value="#{PiecejoinBean.download}" />
+</p:commandButton>
+        </p:column>
+        
+        
+        
+        <p:column  sortBy="#{listd.denomination}"  headerText="Piece join"  >  
+            <h:outputText  value="#{listd.denomination}"/>
+        </p:column>  
+  
+   </p:dataTable>
+  
+  	<p:commandButton action="#{PiecejoinBean.AjouterPiecejoin()}"  id="showDialogButton"  icon="ui-icon-circle-plus"  />				
+
+    </h:form>
+    </p:fieldset>
+   </div>
+
+</p:layoutUnit>
+</p:layout>
+</h:body>
+</html>
